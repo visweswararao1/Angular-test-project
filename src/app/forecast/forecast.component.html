@@ -1,0 +1,37 @@
+<div class="container-fluid" *ngIf="loading"><div class="panel panel-default loading">Loading...</div></div>
+<div class="container-fluid error" *ngIf="error"><div class="panel panel-default">
+  {{error}}</div>
+  </div>
+<div class="container-fluid" *ngIf="!loading">
+  <div class="panel panel-default" *ngIf="forecastData.list">
+    <div class="panel-heading">
+      <h3 class="panel-title">5-day forecast for {{forecastData?.city?.name}}</h3>
+    </div>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let forecast of forecastData.list" >
+          <div class="row">
+          <div class="col-sm-11">
+            {{forecast?.dt*1000 | date : 'EEEE, MMM dd'}}:
+            {{forecast?.weather[0].main}}
+          - Min: {{forecast?.temp?.min}}
+          - Max: {{forecast?.temp?.max}}
+          </div>
+          <div class="col-sm-1">
+          <ng-container *ngIf="checkSnow(forecast?.weather[0]['main'].toLowerCase()) then snow else others1"></ng-container>
+          <ng-template #snow><img class="icon" src="https://www.angulartraining.com/images/weather/snow.png"></ng-template> 
+          <ng-template #others1>
+              <ng-container *ngIf="checkRain(forecast?.weather[0]['main'].toLowerCase()) then rain else others2"></ng-container>
+              <ng-template #rain><img class="icon" src="https://www.angulartraining.com/images/weather/rain.png"></ng-template>
+              <ng-template #others2><ng-container *ngIf="forecast?.weather[0]['main'].toLowerCase()=='clouds' then clouds else others3"></ng-container>
+                <ng-template #clouds><img class="icon" src="https://www.angulartraining.com/images/weather/clouds.png"></ng-template>
+                <ng-template #others3><img class="icon" src="https://www.angulartraining.com/images/weather/sun.png"></ng-template>
+              </ng-template>
+          </ng-template>
+          </div>
+          </div>
+      </li>
+    </ul>
+  </div>
+  <button class="btn btn-success" tabindex="0" id="mainPageBtn" (click)="goBack()">&lt; Back to main page</button>
+</div>
+

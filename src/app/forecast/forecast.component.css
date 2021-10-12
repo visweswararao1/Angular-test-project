@@ -1,0 +1,20 @@
+p {
+    font-family: Lato;
+  }
+  div.container-fluid{
+  
+    margin-top: 15px; 
+  }
+ 
+ ul li {list-style: none; }
+.icon {
+
+    width: 40px;
+    height: 40px;
+ }
+ #mainPageBtn {
+  cursor: pointer;
+  margin-left: 5px;
+ }
+ .loading{text-align: center; font-size: 20px;}
+ .error {text-align: center;}

@@ -1,0 +1,41 @@
+p {
+    font-family: Lato;
+  }
+div.well{
+    border-style: groove;
+    margin-top: 15px; 
+}
+div.well input{
+    margin:0px 10px 0px 0px;
+    }
+p.heading1{
+   z-index: 9999;
+   position: absolute;
+   left: 24px;
+   top: 0px;
+   background: #ffffff;
+   padding: 0 5px 0 5px;
+   font-weight: bold;
+   font-size: 17px;
+}
+div.flex{
+    position: relative;
+}
+
+
+div>p.heading2{
+        z-index: 9999;
+        position: absolute;
+        left: 8px;
+        top: -15px;
+        background: #ffffff;
+        padding: 0 5px 0 5px;
+        font-weight: bold;
+        font-size: 17px;
+     }
+div .icon {
+        width: 150px;
+     }
+.error {color: red;}
+
+

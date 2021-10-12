@@ -1,0 +1,55 @@
+
+<div class="container-fluid">
+
+<div class="well">
+   <p class="heading1">Add Location</p>
+   <form #locationForm="ngForm">
+      <h2>Enter a zipcode:</h2>
+      <div class="row">
+        <div class="col-sm-2">
+           <input type="text" class="form-control" id="addLocation"  placeholder="Zipcode"  required [(ngModel)]="zipcode" name="addLocation">
+           <p *ngIf="error" class="error">{{error}}</p>
+         </div>
+         <div class="col-sm-4">
+           <button class="btn btn-primary" color="primary" id="addLocationBtn" (click)="addZipCode()" [disabled]="!locationForm.form.valid">{{addLocation}}</button>
+        </div>
+      </div>
+    </form>
+</div>
+
+<ng-container *ngFor="let weather of weatherList;index as i;">
+  <div class="well flex">
+        <p class="heading2">{{weather?.name}} ({{weather.zipcode}})</p>
+        <div class="row">
+            <div class="col-sm-10">
+        
+                <p class="h3">Current conditions: {{weather?.weather[0]['main']}}</p>
+                <p class="h4">Temperatures today:</p>
+                <p class="h5">
+                  Current {{weather?.main?.temp}}
+                  - Max {{weather?.main?.temp_max}}
+                  - Min {{weather?.main?.temp_min}}
+                </p>
+                <p class="h5">
+                  <a routerLink="/forecast/{{weather.zipcode}}">Show 5-day forecast for Rancho Cordova</a>
+                </p>
+        
+          </div>
+            <div class="col-sm-2">
+                <span class="close" (click)="Close(i)">×</span>
+                <ng-container *ngIf="checkSnow(weather?.weather[0]['main'].toLowerCase()) then snow else others1"></ng-container>
+                  <ng-template #snow><img class="icon" src="https://www.angulartraining.com/images/weather/snow.png"></ng-template> 
+                  <ng-template #others1>
+                      <ng-container *ngIf="checkRain(weather?.weather[0]['main'].toLowerCase()) then rain else others2"></ng-container>
+                      <ng-template #rain><img class="icon" src="https://www.angulartraining.com/images/weather/rain.png"></ng-template>
+                      <ng-template #others2><ng-container *ngIf="weather?.weather[0]['main'].toLowerCase()=='clouds' then clouds else others3"></ng-container>
+                        <ng-template #clouds><img class="icon" src="https://www.angulartraining.com/images/weather/clouds.png"></ng-template>
+                        <ng-template #others3><img class="icon" src="https://www.angulartraining.com/images/weather/sun.png"></ng-template>
+                      </ng-template>
+                  </ng-template>
+            </div>
+        </div>
+  </div>
+</ng-container>
+
+</div>
